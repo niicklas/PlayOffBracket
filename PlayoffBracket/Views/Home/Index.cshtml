@@ -3,49 +3,64 @@
 }
 
 
-<div class="jumbotron">
-    <h3>Enter amount of players:</h3>
-    <input id="amountOfPlayers" type="text" />
-    <button type="button" class="btn btn-default" id="start-button">Apply</button>
-</div>
+@using (Html.BeginForm())
+{
 
-<br />
-<br />
+    <form class="form-horizontal" style="background-color:whitesmoke">
 
- <div class="table">
-    <table id="tabell" >
-        <thead>
-            <tr>
-                <th>Player</th>
-                <th>Games</th>
-                <th>Wins</th>
-                <th>Tied</th>
-                <th>Losses</th>
-                <th>Point-difference</th>
-                <th>Points</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Schedule</h2>
-        <div id="schedule">
-            
-
+        <div class="jumbotron">
+            <div class="form-group">
+                <h3>Enter amount of players:</h3>
+                <input type="text" class="form-control" id="amountOfPlayers" name="amountOfPlayers">
+                <button type='button' class="btn btn-default" id="start-button">Apply</button>
+            </div>
         </div>
-</div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+        <br />
+        <br />
+
+
+        <div class="form-group">
+            <div class="playernames">
+                <table id="nameTable">
+                    <thead>
+                        <tr>
+                            <th>Player names</th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            </div>
+
+            <div class="table">
+                <table id="tabell">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Games</th>
+                            <th>Wins</th>
+                            <th>Tied</th>
+                            <th>Losses</th>
+                            <th>Point-difference</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Schedule</h2>
+                    <div id="schedule">
+
+
+                    </div>
+                </div>
+            </div>
+
+
+</form>
+}
 <script src="~/Scripts/Custom/createTable.js"></script>

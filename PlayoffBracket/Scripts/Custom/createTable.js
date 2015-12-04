@@ -3,18 +3,36 @@
     //addColumn();
     //addRow();
     $("#tabell").hide();
+    $("#nameTable").hide();
     $('#start-button').on('click', function (e) {
 
         // Hämta innehållet i inmatningsfältet
         var nrOfTeams = +$('#amountOfPlayers').val();
         
-        printTable(nrOfTeams);
-        var players = getPlayers(nrOfTeams);
+        enterTeamName(nrOfTeams);
+
+        //printTable(nrOfTeams);
+       // var players = getPlayers(nrOfTeams);
 
         //alert(players[0]);
-        printSchedule(players);
+        //printSchedule(players);
     }); 
 
+}
+
+function enterTeamName(nrOfTeams) {
+    if (nrOfTeams > 0) {
+        $("#nameTable").show();
+        $('#nameTable tbody').empty();
+        
+        //$(".jumbotron").hide();
+
+        // Gå igenom alla lag
+        for (var i = 1; i <= nrOfTeams; i++) {
+            $('#nameTable tbody').append("<tr id='Player" + i + "'><td><input name='playerNames' type='text'  maxlength='100' placeholder='Player" + i + "'> </td></tr>");
+        }
+        $('#nameTable tbody').append("<button type='submit' class='btn btn-default' id='create-button' >Create table</button>");
+    }
 }
 
 function printTable(nrOfTeams) {

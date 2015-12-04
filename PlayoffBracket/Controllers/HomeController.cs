@@ -9,22 +9,20 @@ namespace PlayoffBracket.Controllers
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {
+        {           
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        [ActionName("Index")]
+        public ActionResult Player_Post(string amountOfPlayers, List<string> playerNames)
         {
-            ViewBag.Message = "Your application description page.";
+            if (amountOfPlayers == null)
+            {
+                return View();
+            }
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

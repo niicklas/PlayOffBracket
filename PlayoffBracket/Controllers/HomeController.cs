@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlayoffBracket.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,7 +23,10 @@ namespace PlayoffBracket.Controllers
                 return View();
             }
 
-            return RedirectToAction("Index");
+            PlayOffLogic mngr = new PlayOffLogic();
+            List<Team> mylist = mngr.generateTeams(playerNames);
+
+            return View("~/Views/Game/GameView.cshtml", mylist);
         }
     }
 }

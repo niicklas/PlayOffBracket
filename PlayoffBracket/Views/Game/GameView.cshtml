@@ -1,0 +1,82 @@
+﻿@model List<PlayoffBracket.Models.Team>
+
+
+@{
+    ViewBag.Title = "GameView";
+}
+
+<h2>Game Table</h2>
+
+
+<div class="table">
+    <table id="tabell">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Games</th>
+                <th>Wins</th>
+                <th>Tied</th>
+                <th>Losses</th>
+                <th>Point-difference</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var team in Model)
+            {
+                <tr>
+                    <th>@Html.DisplayFor(x => team.TeamName)</th>
+                    <th>@Html.DisplayFor(x => team.GamesPlayed)</th>
+                    <th>@Html.DisplayFor(x => team.Wins)</th>
+                    <th>@Html.DisplayFor(x => team.Ties)</th>
+                    <th>@Html.DisplayFor(x => team.Losses)</th>
+                    <th>@Html.DisplayFor(x => team.ScoresForward)-@Html.DisplayFor(x => team.ScoresAgainst)</th>
+                    <th>@Html.DisplayFor(x => team.Points)</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<form>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Schedule</h2>
+            <div id="schedule">
+
+                @if ((Model.Count()) % 2 > 0)
+                {
+                    for (var i = 0; i < Model.Count(); i++)
+                    {
+                        <br />
+                        <div>
+                            <div style='font-size:17px'>Round" + (i + 1) + "</div>
+                        </div>
+                        for (var j = 0; j < (Model.Count() / 2) - (Model.Count() % 2); j++)
+                        {
+                            <div class='game'>
+                                <div>
+                                    <div class='col-md-9'>
+                                        <label for='round" + i + "" + @Model[(i + j * 2) % (@Model.Count())] + "'>@Model[(i + j * 2) % (@Model.Count())]</label>
+                                    </div>
+                                    <div class='col-md-3'>
+                                        <input type='text' class='poang' id='round" + i + "" + @Model[(i + j * 2) % (@Model.Count())] + "' placeholder='0'>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class='col-md-9'>
+                                        <label for='round" + i + "" +@Model[(i + j * 2 + 1) % (Model.Count())] + "'>Model[(i + j * 2 + 1) % (Model.Count())]</label>
+                                    </div><div class='col-md-3'>
+                                        <input type='text' class='poang' id='round" + i + "" + @Model[(i + j * 2 + 1) % (Model.Count())] + "' placeholder='0'>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+        </div>
+    </div>
+</div>
+
+</form>

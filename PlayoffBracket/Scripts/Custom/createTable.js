@@ -29,7 +29,7 @@ function enterTeamName(nrOfTeams) {
 
         // Gå igenom alla lag
         for (var i = 1; i <= nrOfTeams; i++) {
-            $('#nameTable tbody').append("<tr id='Player" + i + "'><td><input name='playerNames' type='text'  maxlength='100' placeholder='Player" + i + "'> </td></tr>");
+            $('#nameTable tbody').append("<tr id='Player" + i + "'><td><input name='playerNames' type='text'  maxlength='100' Value='Player" + i + "'> </td></tr>");
         }
         $('#nameTable tbody').append("<button type='submit' class='btn btn-default' id='create-button' >Create table</button>");
     }

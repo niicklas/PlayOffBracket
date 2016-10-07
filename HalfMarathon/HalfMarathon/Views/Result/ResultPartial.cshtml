@@ -1,0 +1,95 @@
+﻿@model HalfMarathon.Models.ResultViewModel
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Participant.FirstName)*@
+            First name
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Participant.LastName)*@
+            Last name
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Participant.BirthYear)*@
+            Birthyear
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Participant.Club)*@
+            Club
+        </th>
+        <th>
+            <a id="time">Time</a>
+            @*<div id="time"><p>Time</p></div>*@
+            @*@Html.ActionLink("Time", "Index", new { sortOrder = ViewBag.TimeSortOrder })*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Results)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Participant.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Participant.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Participant.BirthYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Participant.Club)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            }
+        </tr>
+    }
+
+</table>
+<script type="text/javascript">
+        $(document).ready(function () {
+
+            //$(document).on("click","#time",onClickLoginPopup);
+
+            $("#time").click(function () {
+                var year = $("#years").val();
+                var sortOrder = @((!Model.TimeAscSortOrder).ToString().ToLower());
+
+                $.get('@Url.Action("ResultPartial", "Result")',  {timeAscSortOrder: sortOrder, year: year }, function (data) {
+                    $('#details').html(data);
+                });
+            });
+
+            $("#years").change(function () {
+                var year = $("#years").val();
+                var sortOrder = @Model.TimeAscSortOrder.ToString().ToLower();
+
+                $.get('@Url.Action("ResultPartial", "Result")',  {timeAscSortOrder: sortOrder, year: year }, function (data) {
+                    $('#details').html(data);
+                });
+
+            });
+        });
+</script>

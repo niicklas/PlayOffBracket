@@ -1,0 +1,34 @@
+﻿@model HalfMarathon.Models.ResultViewModel
+
+    @{
+        ViewBag.Title = "Index";
+
+    }
+
+    <h2>Index</h2>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+    <div>
+        <select id="years">
+            <option value=0>Choose Year</option>
+            @foreach (var year in Model.Results.Select(r => r.Year).Distinct().OrderBy(r => r).ToList())
+            {
+                <option value=@year>@year.ToString()</option>
+            }
+        </select>
+    </div>
+    @Html.HiddenFor(m => m.Year)
+    @Html.HiddenFor(m => m.TimeAscSortOrder)
+    <br />
+    
+<div id="details">
+    @Html.Partial("ResultPartial", Model)
+</div>
+   
+
+    
